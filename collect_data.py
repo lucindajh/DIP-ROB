@@ -1,8 +1,9 @@
-from arm import get_joints, set_state
+from arm import get_joints, set_state, disengage
 import numpy
 import cv2
 import os
 import json
+import time
 
 dataset_dir = 'dataset_grip'
 os.makedirs(dataset_dir, exist_ok=True)
@@ -20,6 +21,7 @@ def save_joints(current_joints, count):
         json.dump(data, f)
 
 set_state('ready_to_grab')
+time.sleep(1)
 
 camera = cv2.VideoCapture(0)
 cv2.namedWindow("preview")
@@ -29,6 +31,7 @@ else:
     rval = False
 
 while rval:
+    disengage()
     cv2.imshow("preview", frame)
     rval, frame = camera.read()
     key = cv2.waitKey(20)
@@ -39,6 +42,7 @@ while rval:
         target_joints = current_joints
         save_image(frame, count)
         save_joints(current_joints, count)
+        set_state('ready_to_grab')
         count += 1
 camera.release()
 cv2.destroyWindow("preview")
