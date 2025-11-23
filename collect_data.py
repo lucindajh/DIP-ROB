@@ -34,6 +34,7 @@ while rval:
     disengage()
     cv2.imshow("preview", frame)
     rval, frame = camera.read()
+    
     key = cv2.waitKey(20)
     if key == 27: # exit on ESC
         break

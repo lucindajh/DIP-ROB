@@ -8,9 +8,9 @@ from xarm import Servo
 arm = xarm.Controller('USB')
 print('Battery voltage in volts:', arm.getBatteryVoltage())
 states = {
-        'home': [107, 533, 229, 785, 643, 69],  # Central safe pos (calibrate once)
-        'ready_to_grab': [98, 529, 263, 873, 399, 493],  # Above fixed piece spot, gripper open/down
-        'ready_to_move': [373, 501, 269, 926, 480, 458]   # Lifted 5-10cm, gripper closed
+        'home': [377, 529, 177, 741, 683, 499],  # Central safe pos (calibrate once)
+        'ready_to_grab': [194, 527, 174, 730, 327, 499],  # Above fixed piece spot, gripper open/down
+        'ready_to_move': [377, 527, 173, 741, 350, 499]   # Lifted 5-10cm, gripper closed
     }
 servos = [xarm.Servo(1), xarm.Servo(2), xarm.Servo(3), xarm.Servo(4), xarm.Servo(5), xarm.Servo(6)]
 def set_state(state_name):
