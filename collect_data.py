@@ -5,7 +5,7 @@ import os
 import json
 import time
 
-dataset_dir = 'dataset_grip'
+dataset_dir = 'dataset_grip_demo'
 os.makedirs(dataset_dir, exist_ok=True)
 count = 0
 
@@ -23,7 +23,7 @@ def save_joints(current_joints, count):
 set_state('ready_to_grab')
 time.sleep(1)
 
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cv2.namedWindow("preview")
 if camera.isOpened(): 
     rval, frame = camera.read()

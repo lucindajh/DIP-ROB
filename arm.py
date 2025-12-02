@@ -10,7 +10,7 @@ print('Battery voltage in volts:', arm.getBatteryVoltage())
 states = {
         'home': [377, 529, 177, 741, 683, 499],  # Central safe pos (calibrate once)
         'ready_to_grab': [194, 527, 174, 730, 327, 499],  # Above fixed piece spot, gripper open/down
-        'ready_to_move': [377, 527, 173, 741, 350, 499]   # Lifted 5-10cm, gripper closed
+        'ready_to_move': [355, 527, 173, 741, 683, 513]   # Lifted 5-10cm, gripper closed
     }
 servos = [xarm.Servo(1), xarm.Servo(2), xarm.Servo(3), xarm.Servo(4), xarm.Servo(5), xarm.Servo(6)]
 def set_state(state_name):
@@ -47,8 +47,17 @@ def disengage():
     for servo in servos:
         arm.servoOff(servo.servo_id)
 
-# set_state('ready_to_grab')
+def adjust_grip_state(adjustment):
+    for i in range(len(states['ready_to_grab'])):
+        if states['ready_to_grab'][i] < 999:
+            states['ready_to_grab'][i] += adjustment
+        
+    states['ready_to_move'][0] = states['ready_to_grab'][0] + 183
+    
+
+#set_state('ready_to_move')
 print(get_joints())
+
 
 # time.sleep(5)
 # disengage()
