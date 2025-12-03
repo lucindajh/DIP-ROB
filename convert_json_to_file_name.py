@@ -6,7 +6,8 @@ import os
 dir_path = 'dataset_grip_2'
 os.makedirs(dir_path, exist_ok=True)
 
-images = glob.glob("dataset_grip/*.jpg")
+images = glob.glob("dataset_grip_2/*")
+print(images)
 count = 0
 for image in images:
     img = cv2.imread(image)
